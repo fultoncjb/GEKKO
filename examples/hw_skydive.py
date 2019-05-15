@@ -6,7 +6,7 @@ Created on Tue Dec 12 21:58:04 2017
 """
 from gekko import GEKKO
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 #number of points in time discretization
 n = 91
@@ -51,9 +51,9 @@ m.Equation(v == (vx**2 + vy**2)**.5)
 m.options.IMODE = 4 #dynamic simulation
 
 #Solve simulation
-m.solve()
+m.solve(GUI=True)
 
-m.GUI()
+# m.GUI()
 # #%% Plot results
 # plt.figure()
 # plt.plot(x.value,y.value)
