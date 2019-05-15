@@ -441,10 +441,21 @@ class GK_GUI:
     """GUI class for GEKKO
     Creates and manages the FlaskThread that actually runs the API.
     """
-    def __init__(self, path):
+    def __init__(self, path, constants, parameters, variables, intermediates):
         self.path = path
 
+        try:
+            from gekkogui import GekkoGui
+        except ImportError:
+            print('Error importing GekkoGui')
+            
+        self.gui = GekkoGui(path, constants, parameters, variables, intermediates)
+        # Get a reference to the GEKKO model object and pass it to the GUI
+
     def display(self):
+        self.gui.display()
+
+    def display_rename(self):
         """Finds the appropriate port starts the api and opens the webbrowser"""
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # It is necessary to have a reference like this as flaskThread cannot
@@ -483,6 +494,9 @@ class GK_GUI:
             # app.run(debug=False, port=port)
 
     def update(self):
+        self.gui.update()
+
+    def update_rename(self):
         """Alert the API of new solution results"""
         if DEV:
             print('Handling update')

@@ -2048,7 +2048,8 @@ class GEKKO(object):
             self.gui.update()
         elif GUI is True:
             self._gui_open = True
-            self.gui = GK_GUI(self._path)
+            self.gui = GK_GUI(self._path, self._constants, self._parameters, 
+                self._variables, self._intermediates)
             self.gui.display()
 
     #%% Name matching
@@ -2160,5 +2161,6 @@ class GEKKO(object):
 
     def GUI(self):
         if not self._gui_open:
-            self.gui = GK_GUI(self._path)
+            self.gui = GK_GUI(self._path, self._constants, self._parameters,
+                self.variables, self._intermediates)
             self.gui.display()
